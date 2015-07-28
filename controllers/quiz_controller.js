@@ -9,14 +9,14 @@ exports.index = function (req, res) {
 
 //Get/quizes/:id
 exports.show = function (req, res) {
-    models.Quiz.findAll(req.params.quizId).then(function (quiz) { 
-        res.render("quizes/show", { quiz: {id:1, pregunta: "klk", respuesta:"tu lo abe"}});
+    models.Quiz.find(req.params.quizId).then(function (quiz) { 
+        res.render("quizes/show", { quiz: quiz});
     });    
 };
 
 //Get/quizes/:id/answer  
 exports.answer = function (req, res) {
-    models.Quiz.findAll(req.params.quizId).then(function (quiz) { 
+    models.Quiz.find(req.params.quizId).then(function (quiz) { 
     if (req.query.respuesta === quiz.respuesta) {
         res.render("quizes/answer",  { quiz: quiz, respuesta: "Correcto" });
     }
