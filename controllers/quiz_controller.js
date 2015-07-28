@@ -7,10 +7,10 @@ exports.index = function (req, res) {
     });
 };
 
-//Get/quizes/question
+//Get/quizes/:id
 exports.show = function (req, res) {
-    models.Quiz.findAll(req.params.quizid).then(function (quiz) { 
-        res.render("quizes/show", { quiz: quiz});
+    models.Quiz.findAll(req.params.quizId).then(function (quiz) { 
+        res.render("quizes/show", { quiz: quiz, pregunta : quiz.pregunta});
     });    
 };
 
