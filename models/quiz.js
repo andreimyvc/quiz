@@ -1,8 +1,7 @@
-module.exports = function (sequalize, DataType) {
-    return sequalize.define('quiz',
+module.exports = function (sequelize, DataTypes) {
+    return sequelize.define('Quiz',
     {
-        Id: DataType.INTEGER,
-        Pregunta: DataType.STRING,
-        Respuesta: DataType.STRING
+        pregunta: DataTypes.STRING,
+        respuesta: DataTypes.STRING
     });
 };
