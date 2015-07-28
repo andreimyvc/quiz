@@ -7,6 +7,7 @@ router.get('/', function(req, res) {
   res.render('index', { title: 'Quiz' });
 });
 
-router.get('/quizes/question', quizController.question);
-router.get('/quizes/answer', quizController.answer);
+router.get('/quizes',                       quizController.index);
+router.get('/quizes/:quizid(\\d+)',         quizController.show);
+router.get('/quizes/:quizid(\\d+)/answer',  quizController.answer);
 module.exports = router;
