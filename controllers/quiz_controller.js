@@ -13,9 +13,9 @@ exports.load = function (req, res, next, quizId) {
 };
 // Get /quizes
 exports.index = function (req, res) {
-    models.Quiz.findAll().then(
+    models.Quiz.findAll(findAll({where: ["pregunta like ?",  '%'+req.query.search+'%']}]).then(
     function (quizes) {
-        res.render('quizes/index.ejs', { quizes: quizes});
+        res.render('quizes/index', { quizes: quizes});
     }).catch(function(error) { next(error);});
 };
 
@@ -42,4 +42,8 @@ exports.answer = function (req, res) {
     //    res.render("quizes/answer", { quiz: quiz,  respuesta: "incorrecto" });
     //}        
     //}); 
+};
+
+exports.author = function(req, res, next) {
+  res.render('author', { title: 'Autor' });
 };

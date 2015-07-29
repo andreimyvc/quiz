@@ -22,13 +22,16 @@ var sequelize = new Sequelize(DB_name, user, pwd,
         omitNull: true  // solo Postgres
     }
 );
+//var sequelize = new Sequelize(null, null, null,
+//    { dialect: "sqlite", storage: "quiz.sqlite" }
+//);
 
 //Importamos la definicion de la tabla Quiz en quiz.js
 var Quiz = sequelize.import(path.join(__dirname,'quiz'));
 
 exports.Quiz = Quiz;
-sequelize.sync().success(function () { 
-    Quiz.count().success(function (count){
+sequelize.sync().then(function () { 
+    Quiz.count().then(function (count){
         if(count === 0){
             Quiz.create({
                 pregunta: "¿Capital de Italia?",
