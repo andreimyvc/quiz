@@ -46,7 +46,7 @@ exports.answer = function (req, res) {
 //Get/quizes/new  
 exports.new = function (req, res) {
    var quiz = models.Quiz.build({ pregunta: "", respuesta: ""}); 
-   res.render("quizes/answer", {quiz: quiz});
+   res.render("quizes/new", { quiz: quiz });
 }
 
 //Get/quizes/create
