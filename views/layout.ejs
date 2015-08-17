@@ -27,7 +27,8 @@
                 <span id="ErrorMsgs">
                     Corregir Errores: <br/>
                     <% for( var i in errors ) { %>
-                    <span> <%= errors[i].message %></span> <br/>
+                    alert(errors[i]);
+                    <span> <%= errors[i].msg %></span> <br/>
                     <%}%>
                 </span>
                 <%}%>
