@@ -43,7 +43,31 @@ exports.answer = function (req, res) {
     //}        
     //}); 
 };
+//Get/quizes/new  
+exports.new = function (req, res) {
+   var quiz = models.Quiz.build({ pregunta: "", respuesta: ""}); 
+   res.render("quizes/answer", {quiz: quiz});
+}
 
+//Get/quizes/create
+exports.create = function (req, res) {
+    var quiz = models.Quiz.build(req.body.quiz);
+
+    //Guardamos la nueva pregunta.
+    quiz.save({ fields: ["pregunta","respuesta"]}).then(
+    function(){
+        res.redirect("/quizes");
+    });
+}
+
+//Get/quizes/:id/edit  
+exports.edit = function (req, res) {
+    var quiz = req.quiz;
+
+    res.render("quizes/edit", {quiz:quiz, errors: []});
+}
+//Get/quizes/:id/update  
+exports.update = function (req, res) {}
 exports.author = function(req, res, next) {
   res.render('author', { title: 'Autor' });
 };
