@@ -53,11 +53,19 @@ exports.new = function (req, res) {
 exports.create = function (req, res) {
     var quiz = models.Quiz.build(req.body.quiz);
 
-    //Guardamos la nueva pregunta.
-    quiz.save({ fields: ["pregunta","respuesta"]}).then(
-    function(){
-        res.redirect("/quizes");
-    });
+    
+    quiz.Validate().then( function(err){
+        if(err){
+            res.render("/quizes/new", { quiz: quiz, errors: err.errors });
+        }
+        else{
+            //Guardamos la nueva pregunta.
+            quiz.save({ fields: ["pregunta","respuesta"]}).then(
+            function(){
+                res.redirect("/quizes");
+                });
+            }
+        });
 }
 
 //Get/quizes/:id/edit  
