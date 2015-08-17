@@ -1,0 +1,87 @@
+<html>
+<head>
+    <title>iisnode logs</title>
+    <style type="text/css">
+        body
+        {
+            font-family: "Trebuchet MS" , Arial, Helvetica, sans-serif;
+        }
+        table
+        {
+            border-collapse: collapse;
+        }
+        td, th
+        {
+            border: 1px solid lightgray;
+            padding: 3px 7px 2px 7px;
+        }
+        th
+        {
+            text-align: left;
+            padding-top: 5px;
+            padding-bottom: 4px;
+            background-color: Gray;
+            color: #ffffff;
+        }
+        td.stderr
+        {
+            color: Red;
+        }
+    </style>
+</head>
+<body>
+    <table id="logFilesTable">
+        <tr>
+            <th>
+                Computer name
+            </th>
+            <th>
+                PID
+            </th>
+            <th>
+                Type
+            </th>
+            <th>
+                Created
+            </th>
+            <th>
+                Link
+            </th>
+        </tr>
+    </table>
+    <p id="lastUpdated"></p>
+    <script type="text/javascript">
+
+        // this is replaced with actual data at runtime by code in interceptor.js
+        var logFiles = [{"file":"EV_INF_DES20-1012-stderr-1438175578444.txt","computername":"EV_INF_DES20","pid":1012,"type":"stderr","created":1438175578444},{"file":"EV_INF_DES20-1108-stderr-1438112895152.txt","computername":"EV_INF_DES20","pid":1108,"type":"stderr","created":1438112895152},{"file":"EV_INF_DES20-1768-stderr-1438177183131.txt","computername":"EV_INF_DES20","pid":1768,"type":"stderr","created":1438177183131},{"file":"EV_INF_DES20-2640-stderr-1438175564770.txt","computername":"EV_INF_DES20","pid":2640,"type":"stderr","created":1438175564770},{"file":"EV_INF_DES20-3292-stderr-1439826044681.txt","computername":"EV_INF_DES20","pid":3292,"type":"stderr","created":1439826044681},{"file":"EV_INF_DES20-364-stderr-1439825615942.txt","computername":"EV_INF_DES20","pid":364,"type":"stderr","created":1439825615942},{"file":"EV_INF_DES20-364-stderr-1439825959947.txt","computername":"EV_INF_DES20","pid":364,"type":"stderr","created":1439825959947},{"file":"EV_INF_DES20-5008-stderr-1438177183858.txt","computername":"EV_INF_DES20","pid":5008,"type":"stderr","created":1438177183858},{"file":"EV_INF_DES20-5152-stdout-1438089537465.txt","computername":"EV_INF_DES20","pid":5152,"type":"stdout","created":1438089537465},{"file":"EV_INF_DES20-5620-stderr-1439825958849.txt","computername":"EV_INF_DES20","pid":5620,"type":"stderr","created":1439825958849},{"file":"EV_INF_DES20-5828-stderr-1438112903472.txt","computername":"EV_INF_DES20","pid":5828,"type":"stderr","created":1438112903472},{"file":"EV_INF_DES20-5968-stdout-1438089513899.txt","computername":"EV_INF_DES20","pid":5968,"type":"stdout","created":1438089513899},{"file":"EV_INF_DES20-6700-stderr-1439825642356.txt","computername":"EV_INF_DES20","pid":6700,"type":"stderr","created":1439825642356},{"file":"EV_INF_DES20-7096-stderr-1439826045402.txt","computername":"EV_INF_DES20","pid":7096,"type":"stderr","created":1439826045402},{"file":"EV_INF_DES20-8520-stderr-1439214023293.txt","computername":"EV_INF_DES20","pid":8520,"type":"stderr","created":1439214023293}];
+        var lastUpdated = 1439826045568;
+        var date = new Date();
+
+        date.setTime(lastUpdated);
+        document.getElementById('lastUpdated').innerHTML = 'Index was last updated ' + date;
+
+        logFiles.sort(function (a, b) {
+            return b.created - a.created;
+        });
+
+        var logFilesTable = document.getElementById("logFilesTable");
+        for (var i = 0; i < logFiles.length; i++) {
+            var logFile = logFiles[i];
+            date.setTime(logFile.created);
+            var row = logFilesTable.insertRow(-1);
+            var computerNameCell = row.insertCell(0);
+            var pidCell = row.insertCell(1);
+            var typeCell = row.insertCell(2);
+            var dateCell = row.insertCell(3);
+            var logCell = row.insertCell(4);
+            computerNameCell.innerHTML = logFile.computername;
+            pidCell.innerHTML = logFile.pid.toString();
+            typeCell.innerHTML = logFile.type;
+            typeCell.setAttribute('class', logFile.type);
+            dateCell.innerHTML = date.toString();
+            logCell.innerHTML = '<a href="' + logFile.file + '">log</a>';
+        };
+
+    </script>
+</body>
+</html>
