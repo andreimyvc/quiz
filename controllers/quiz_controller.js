@@ -31,9 +31,9 @@ exports.show = function (req, res) {
 exports.answer = function (req, res) {
     var result = 'Incorrecto';
     if(req.query.respuesta === req.quiz.respuesta){
-        resultado = 'Correcto';
+        result = 'Correcto';
     }
-    res.render('quizes/answer', {quiz: req.quiz, respuesta: resultado, errors: [] });
+    res.render('quizes/answer', {quiz: req.quiz, respuesta: result, errors: [] });
     //models.Quiz.find(req.params.quizId).then(function (quiz) { 
     //if (req.query.respuesta === quiz.respuesta) {
     //    res.render("quizes/answer",  { quiz: quiz, respuesta: "Correcto" });
@@ -52,7 +52,7 @@ exports.add = function (req, res) {
 //Get/quizes/create
 exports.create = function (req, res) {
     var quiz = models.Quiz.build(req.body.quiz);
-
+    quiz.tema = req.body.tema;
     var err = quiz.validate();    
     if(err){
         res.render("quizes/new", { quiz: quiz, errors: err });
@@ -76,8 +76,10 @@ exports.edit = function (req, res) {
 exports.update = function (req, res) {
     req.quiz.pregunta = req.body.quiz.pregunta;
     req.quiz.respuesta = req.body.quiz.respuesta;
-    req.quiz.tema = req.body.quiz.tema;
+    //req.quiz.tema = req.body.quiz.tema;    
     var quiz = req.quiz;
+    quiz.tema = req.body.tema;
+
     var err = quiz.validate();
         if(err){
           res.render("quizes/edit", { quiz: quiz, errors: err.errors });   
