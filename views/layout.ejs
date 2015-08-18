@@ -23,14 +23,14 @@
                 <span><a href="/author">Creditos</a></span>
             </nav>
             <section class="main" id="s1">
-                <% if(errors.length) { %>
+                <% if(errors.length != 0) { %>
                 <span id="ErrorMsgs">
                     Corregir Errores: <br/>
                     <% for( var i in errors ) { %>
-                    <span> <%= errors[i].msg %></span> <br/>
+                    <span> <%= errors[i] %></span> <br/>
                     <%}%>
                 </span>
-                <%}%>
+                <% } %>
                 <%- body%> 
             </section>
             <footer class="main" id="f1">

@@ -44,7 +44,7 @@ exports.answer = function (req, res) {
     //}); 
 };
 //Get/quizes/new  
-exports.new = function (req, res) {
+exports.add = function (req, res) {
    var quiz = models.Quiz.build({ pregunta: "", respuesta: ""}); 
    res.render("quizes/new", { quiz: quiz, errors: [] });
 }
@@ -53,19 +53,17 @@ exports.new = function (req, res) {
 exports.create = function (req, res) {
     var quiz = models.Quiz.build(req.body.quiz);
 
-    
-    quiz.Validate().then( function(err){
-        if(err){
-            res.render("/quizes/new", { quiz: quiz, errors: err.errors });
+    var err = quiz.validate();    
+    if(err){
+        res.render("quizes/new", { quiz: quiz, errors: err });
+    }
+    else{
+        //Guardamos la nueva pregunta.
+        quiz.save({ fields: ["pregunta","respuesta"]}).then(
+        function(){
+            res.redirect("/quizes");
+            });
         }
-        else{
-            //Guardamos la nueva pregunta.
-            quiz.save({ fields: ["pregunta","respuesta"]}).then(
-            function(){
-                res.redirect("/quizes");
-                });
-            }
-        });
 }
 
 //Get/quizes/:id/edit  
@@ -74,24 +72,31 @@ exports.edit = function (req, res) {
 
     res.render("quizes/edit", {quiz:quiz, errors: []});
 }
-//Get/quizes/:id/update  
+//put/quizes/:id/update  
 exports.update = function (req, res) {
     req.quiz.pregunta = req.body.quiz.pregunta;
     req.quiz.respuesta = req.body.quiz.respuesta;
-
-    req.quiz.validate().then(
-    function(err){
+    var quiz = req.quiz;
+    var err = quiz.validate();
         if(err){
-          res.render("quizes/edit", { quiz: req.quiz, errors: err.errors });   
+          res.render("quizes/edit", { quiz: quiz, errors: err.errors });   
         }else{
             //Guardamos la nueva pregunta.
             quiz.save({ fields: ["pregunta","respuesta"]}).then(
             function(){
                 res.redirect("/quizes");
                 });          
-        }        
-    });
+        };
 }
+
+//Delete/quizes/:id/edit  
+exports.destroy = function (req, res) {
+    var quiz = req.quiz;
+    quiz.destroy().then( function(err){
+    res.redirect("/quizes");})
+    .catch(function(error){next(error);});
+}
+
 exports.author = function(req, res, next) {
-  res.render('author', { title: 'Autor' });
+  res.render('author', { title: 'Autor', errors: [] });
 };

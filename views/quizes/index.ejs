@@ -15,6 +15,12 @@
                       <button>Editar</button>
                   </a>
               </td>
+              <td>
+                  <form method="post" action="quizes/<%= quizes[i].id %>?_method=delete"> 
+                      <button type="submit" onclick=" return confirm('Borrar: <%= quizes[i].pregunta %> ')">Borrar</button>
+    
+                  </form>
+              </td>
           </tr>
           <% } %>
 </table>
