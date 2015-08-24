@@ -5,17 +5,17 @@ exports.add = function (req, res) {
     res.render('comments/new.ejs', { quizid: req.params.quizId, errors: [] });
 }
 
-//POST /quizes/:quizId/comments
+//POST /quizes/:quizId/comments/create
 exports.create = function (req, res) {
     var comment = models.Comment.build(
     {
-        texto: req.body.comment.texto, QuizId: req.params.quizId
+        texto: req.body.comment.texto,
+        QuizId: req.params.quizId
     });
-
     var err = comment.validate();
     try {
         if (err) {
-            res.render('comments/new.ejs', { comment: comment, quizid: req.params.quizId, errors: err.errors });
+            res.render('comments/new.ejs', { comment: comment, quizid: req.params.quizId, errors: err });
         } else {
             comment.save().then(function () { res.redirect('/quizes/' + req.params.quizId) });
         }

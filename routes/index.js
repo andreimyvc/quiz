@@ -21,7 +21,7 @@ router.delete('/quizes/:quizId(\\d+)',      quizController.destroy);
 router.get('/author',                       quizController.author);
 
 
-router.get('/quizes/:quizId(\\d+)/comments/new',    commentController.add);
-router.post('/quizes/:quizId(\\d+)/comment',        quizController.create);
+router.get ('/quizes/:quizId(\\d+)/comments/new',    commentController.add);
+router.post('/quizes/:quizId(\\d+)/comments/create',        commentController.create);
 
 module.exports = router;

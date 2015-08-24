@@ -24,7 +24,8 @@ exports.index = function (req, res) {
 
 //Get/quizes/:id
 exports.show = function (req, res) {
-    res.render('quizes/show', { quiz:req.quiz, errors: [] });
+    var quiz = req.quiz;
+    res.render('quizes/show', { quiz:quiz,  errors: [] }); 
     //models.Quiz.find(req.params.quizId).then(function (quiz) { 
     //    res.render("quizes/show", { quiz: quiz});
     //});    
