@@ -1,6 +1,6 @@
 Application has thrown an uncaught exception and is terminated:
 TypeError: Cannot read property 'match' of undefined
-    at Object.<anonymous> (C:\Users\cvilorio\Documents\My Web Sites\NodeJS\quiz\models\models.js:3:35)
+    at Object.<anonymous> (C:\Users\cvilorio\Documents\My Web Sites\NodeJS\quiz\models\models.js:7:35)
     at Module._compile (module.js:460:26)
     at Object.Module._extensions..js (module.js:478:10)
     at Module.load (module.js:355:32)
